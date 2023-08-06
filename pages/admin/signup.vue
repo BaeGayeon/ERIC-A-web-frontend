@@ -57,7 +57,7 @@ export default {
                     return 0;
                 }
                 let response = await this.$axios.get(`user/signup/checkphone/${this.phoneNumber}`)
-                if (response.data.res == true) {
+                if (response.data.isSuccess) {
                     alert('사용 가능한 전화번호입니다.');
                     this.checkPhoneNumberText = '전화번호 중복체크 완료'
                     return 1;
@@ -72,7 +72,7 @@ export default {
         async isPhoneNumberAvailable() {
             try {
                 let response = await this.$axios.get(`user/signup/checkphone/${this.phoneNumber}`);
-                if (response.data.res == true) {
+                if (response.data.isSuccess == true) {
                     return 1;
                     } else {
                     return 0;
@@ -111,7 +111,7 @@ export default {
                 this.$axios.defaults.withCredentials = true
                 this.$axios.post('/admin/signup', userData)
                 .then(function (res) {
-                    if (res.status == 200) {
+                    if (res.data.isSuccess) {
                         alert('회원 가입 완료되었습니다.');
                         $nuxt.$router.push('/admin');
                     }
